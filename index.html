@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MasterFlow</title>
+  <meta name="description" content="MasterFlow: a voice-first productivity agent that plans your day around your projects.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+
+<!-- Sign in / register -->
+<div id="auth" class="authwrap" hidden>
+  <div class="card auth">
+    <h1>Master<em>Flow</em></h1>
+    <p class="sub" id="at">Welcome back</p>
+    <div id="ae-wrap"><label>Email<input id="ae" type="email" autocomplete="email" maxlength="200"></label></div>
+    <div id="ap-wrap"><label>Password<input id="ap" type="password" autocomplete="current-password" maxlength="200"></label></div>
+    <button id="ab">Sign in</button>
+    <div class="nt"><a href="#" id="as">Create an account</a></div>
+    <div class="nt"><a href="#" id="af">Forgot password?</a></div>
+    <div id="am" class="nt"></div>
+  </div>
+</div>
+
+<!-- The app -->
+<div id="app" hidden>
+  <div class="bar">
+    <div class="lt"><button id="hm" title="Menu">☰</button><h1>Master<em>Flow</em></h1></div>
+    <nav><button data-p="chat">Chat</button><button id="tb">Board</button></nav>
+    <div id="mn" class="mn" hidden>
+      <button data-p="projects">Projects</button>
+      <button data-p="profile">Profile</button>
+      <button data-p="history">History</button>
+      <button data-p="settings">Settings</button>
+      <button id="lo2">Log out</button>
+    </div>
+  </div>
+  <div id="msg"></div>
+
+  <div id="chat" class="pg">
+    <div class="col">
+      <div id="log"></div>
+      <div class="inp"><textarea id="in" placeholder="Tell me what's on your plate…" rows="1"></textarea><button id="sd">Send</button></div>
+    </div>
+    <div class="panel">
+      <div class="card"><h2>Active project</h2><select id="pj"></select></div>
+      <div class="card"><h2>Core goal</h2><textarea id="goal" class="goal" placeholder="The one outcome everything else serves…"></textarea></div>
+      <div class="card"><h2>Today's focus</h2><textarea id="focus" placeholder="The one thing that makes today a win…"></textarea></div>
+      <div class="card"><input id="nt" placeholder="Add a task for today, press Enter" maxlength="200"></div>
+      <div id="pl"></div>
+    </div>
+  </div>
+
+  <div id="projects" class="pg" hidden><div class="wrap">
+    <div class="card" id="pnew"><h2>New project</h2><input id="np" placeholder="Project name, press Enter" maxlength="60"></div>
+    <div id="prj"></div>
+  </div></div>
+
+  <div id="profile" class="pg" hidden><div class="wrap">
+    <div class="stats" id="stats"></div>
+    <button id="gs">Generate summary</button>
+    <h2 style="margin-top:16px">By project</h2><div id="pa"></div>
+    <h2>This month, day by day</h2><div id="dl"></div>
+  </div></div>
+
+  <div id="history" class="pg" hidden><div class="wrap"><div id="hist"></div></div></div>
+
+  <div id="settings" class="pg" hidden><div class="wrap">
+    <div class="card"><h2>Assistant</h2>
+      <label>Name<input data-k="assistantName" maxlength="30"></label>
+      <label>Tone<input data-k="tone" maxlength="200" placeholder="e.g. direct, a bit funny, never pushy"></label>
+      <label>Methodology<textarea data-k="methodology" rows="2" placeholder="How you want your day structured"></textarea></label>
+      <label>Rules for how it works<textarea data-k="rules" rows="3" placeholder="e.g. No deep work after 4pm. Ask before moving my must-win."></textarea></label>
+      <label class="row"><input type="checkbox" data-k="voice"> Speak replies aloud</label>
+      <button class="g" id="tv" style="margin-top:6px">Test voice</button>
+    </div>
+    <div class="card"><h2>Check-ins</h2>
+      <div class="g2">
+        <label>Start-of-day brief<input type="time" data-k="morning"></label>
+        <label>Midday check-in<input type="time" data-k="midday"></label>
+        <label>End-of-day summary<input type="time" data-k="evening"></label>
+        <label>Nudge every N min while a task runs (0 = off)<input type="number" min="0" max="240" data-k="nudge"></label>
+      </div>
+      <p class="nt">Check-ins appear in chat while the app is open.</p>
+    </div>
+    <div class="card"><h2>Model</h2>
+      <label>API key (Anthropic or OpenAI)<input id="ak" type="password" autocomplete="off" placeholder="sk-ant-… or sk-…"></label>
+      <label>Model (optional, leave empty for the default)<input data-k="model" maxlength="100" placeholder="e.g. claude-sonnet-5-5"></label>
+      <div style="display:flex;gap:8px;margin-top:10px"><button id="sk">Save key</button><button class="g" id="rk" hidden>Remove key</button></div>
+      <p class="nt" id="ks"></p>
+    </div>
+    <div class="card"><h2>Account</h2>
+      <div class="nt" id="acct"></div>
+      <button id="lo" style="margin-top:10px">Log out</button>
+    </div>
+  </div></div>
+
+  <div id="dr" class="dr" hidden></div>
+  <div class="fab"><button id="fc" title="Chat with the agent">💬</button><button id="mic" title="Speak to the agent">🎤</button></div>
+</div>
+
+</body>
+</html>
