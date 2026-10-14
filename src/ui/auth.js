@@ -1,5 +1,5 @@
 import { $, msg } from '../lib/util.js';
-import { supabase, configured } from '../lib/supabase.js';
+import { supabase, configured, missing } from '../lib/supabase.js';
 
 let mode = 'signin'; // signin | signup | reset | recover
 
@@ -29,7 +29,7 @@ export function showAuth() {
   $('#app').hidden = true;
   $('#auth').hidden = false;
   if (!configured) {
-    say('Supabase is not configured. Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY (see README).', true);
+    say(`Supabase is not configured: ${missing.join(' and ')} ${missing.length > 1 ? 'are' : 'is'} empty in this build. Add ${missing.length > 1 ? 'them' : 'it'} in Netlify (scope: Builds) and redeploy (see README).`, true);
     $('#ab').disabled = true;
     return;
   }
